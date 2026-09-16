@@ -1,0 +1,24 @@
+-------------------------------------------------------------------------------
+Test set: edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 1, Errors: 1, Skipped: 0, Time elapsed: 0.051 s <<< FAILURE! -- in edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest
+edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest.shouldRegisterDroneWhenDataIsValid -- Time elapsed: 0.017 s <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest.shouldRegisterDroneWhenDataIsValid(RescueCenterTest.java:27)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
+edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest.shouldAssignMissionWhenAllDataIsCorrect -- Time elapsed: 0.008 s <<< ERROR!
+java.lang.NullPointerException: Cannot invoke "edu.eci.dosw.tdd.skyrescue.mission.Mission.getLocation()" because "mission" is null
+	at edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest.shouldAssignMissionWhenAllDataIsCorrect(RescueCenterTest.java:46)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+
