@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.1" name="edu.eci.dosw.AppTest" time="0.098" tests="1" errors="0" skipped="0" failures="0">
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report.xsd" version="3.0.1" name="edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest" time="0.051" tests="3" errors="1" skipped="0" failures="1">
   <properties>
     <property name="java.specification.version" value="25"/>
     <property name="sun.cpu.isalist" value="amd64"/>
@@ -60,5 +60,27 @@
     <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
     <property name="java.class.version" value="69.0"/>
   </properties>
-  <testcase name="shouldAnswerWithTrue" classname="edu.eci.dosw.AppTest" time="0.052"/>
+  <testcase name="shouldNotRegisterDroneWhenDroneIsNull" classname="edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest" time="0.007"/>
+  <testcase name="shouldRegisterDroneWhenDataIsValid" classname="edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest" time="0.017">
+    <failure message="expected: &lt;true&gt; but was: &lt;false&gt;" type="org.opentest4j.AssertionFailedError"><![CDATA[org.opentest4j.AssertionFailedError: expected: <true> but was: <false>
+	at org.junit.jupiter.api.AssertionFailureBuilder.build(AssertionFailureBuilder.java:151)
+	at org.junit.jupiter.api.AssertionFailureBuilder.buildAndThrow(AssertionFailureBuilder.java:132)
+	at org.junit.jupiter.api.AssertTrue.failNotTrue(AssertTrue.java:63)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:36)
+	at org.junit.jupiter.api.AssertTrue.assertTrue(AssertTrue.java:31)
+	at org.junit.jupiter.api.Assertions.assertTrue(Assertions.java:183)
+	at edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest.shouldRegisterDroneWhenDataIsValid(RescueCenterTest.java:27)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+]]></failure>
+  </testcase>
+  <testcase name="shouldAssignMissionWhenAllDataIsCorrect" classname="edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest" time="0.008">
+    <error message="Cannot invoke &quot;edu.eci.dosw.tdd.skyrescue.mission.Mission.getLocation()&quot; because &quot;mission&quot; is null" type="java.lang.NullPointerException"><![CDATA[java.lang.NullPointerException: Cannot invoke "edu.eci.dosw.tdd.skyrescue.mission.Mission.getLocation()" because "mission" is null
+	at edu.eci.dosw.tdd.skyrescue.center.RescueCenterTest.shouldAssignMissionWhenAllDataIsCorrect(RescueCenterTest.java:46)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1604)
+]]></error>
+  </testcase>
 </testsuite>
