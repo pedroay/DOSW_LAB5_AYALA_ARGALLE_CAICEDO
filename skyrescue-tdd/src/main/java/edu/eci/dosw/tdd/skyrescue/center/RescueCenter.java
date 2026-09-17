@@ -157,9 +157,10 @@ public class RescueCenter {
 
         mission.setStatus(MissionStatus.COMPLETED);
         mission.setEndDate(LocalDateTime.now());
+        Drone drone = mission.getDrone();
         
-        if (mission.getDrone() != null) {
-            mission.getDrone().setAvailable(true);
+        if (drone != null) {
+            drone.setAvailable(true);
         }
 
         return mission;
