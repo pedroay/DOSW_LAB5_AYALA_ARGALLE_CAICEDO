@@ -34,6 +34,13 @@ public class RescueCenterTest {
         assertFalse(prueba);
     }
 
+    @Test
+    void shouldNotRegisterDroneWhenIdIsEmpty() {
+        Drone drone = new Drone("", "Model1", 100);
+        boolean prueba = rescueCenter.addDrone(drone);
+        assertFalse(prueba);
+    }
+
     // PRUEBAS PARA EL METODO assignMission
 
     @Test
@@ -59,6 +66,27 @@ public class RescueCenterTest {
         assertThrows(IllegalArgumentException.class, () -> rescueCenter.assignMission("OP1", "DR001", "LOCATION", 10));
     }
 
+    @Test
+    void shouldNotAssignWhenDroneIsAlreadyOccupied() {
+        RescueOperator operator1 = new RescueOperator("OP1", "Operator 1");
+        RescueOperator operator2 = new RescueOperator("OP2", "Operator 2");
+        Drone drone = new Drone("DR001", "Model1", 100);
+        rescueCenter.addOperator(operator1);
+        rescueCenter.addOperator(operator2);
+        rescueCenter.addDrone(drone);
+        rescueCenter.assignMission("OP1", "DR001", "LOCATION_1", 10);
+        assertThrows(IllegalStateException.class, () -> rescueCenter.assignMission("OP2", "DR001", "LOCATION_2", 20));
+    }
+
+    @Test
+    void shouldNotAssignWhenDistanceExceedsDroneAutonomy() {
+        RescueOperator operator = new RescueOperator("OP1", "NAME");
+        Drone drone = new Drone("DR001", "Model1", 100);
+        rescueCenter.addOperator(operator);
+        rescueCenter.addDrone(drone);
+        assertThrows(IllegalArgumentException.class, () -> rescueCenter.assignMission("OP1", "DR001", "LOCATION", 150));
+    }
+
     // PRUEBAS PARA completeMission
     @Test
     void shouldCloseAActiveMission() {
@@ -78,6 +106,17 @@ public class RescueCenterTest {
     @Test
     void shouldThrowAExcpetionBeacuseNonExistentMission() {
         assertThrows(IllegalArgumentException.class, () -> rescueCenter.completeMission(""));
+    }
+
+    @Test
+    void shouldNotCompleteMissionTwice() {
+        RescueOperator operator = new RescueOperator("OP1", "NAME");
+        Drone drone = new Drone("DR001", "Model1", 100);
+        rescueCenter.addOperator(operator);
+        rescueCenter.addDrone(drone);
+        Mission mission = rescueCenter.assignMission("OP1", "DR001", "LOCATION", 10);
+        rescueCenter.completeMission(mission.getId());
+        assertThrows(IllegalStateException.class, () -> rescueCenter.completeMission(mission.getId()));
     }
 
 }
