@@ -41,6 +41,16 @@ public class RescueCenterTest {
         assertFalse(prueba);
     }
 
+    @Test
+    void shouldNotRegisterDuplicateDroneID() {
+        Drone drone1 = new Drone("DR001", "Model1", 100);
+        Drone drone2 = new Drone("DR001", "Model2", 150);
+
+        boolean primerRegistro = rescueCenter.addDrone(drone1);
+        boolean segundoRegistro = rescueCenter.addDrone(drone2);
+        assertFalse(segundoRegistro);
+    }
+
     // PRUEBAS PARA EL METODO assignMission
 
     @Test
@@ -87,6 +97,28 @@ public class RescueCenterTest {
         assertThrows(IllegalArgumentException.class, () -> rescueCenter.assignMission("OP1", "DR001", "LOCATION", 150));
     }
 
+    @Test
+    void shouldThrowExceptionWhenOperatorDoesNotExist() {
+        Drone drone = new Drone("DR001", "Model1", 100);
+        rescueCenter.addDrone(drone);
+        assertThrows(IllegalArgumentException.class, () -> rescueCenter.assignMission("OP_INEXISTENTE", "DR001", "LOCATION", 10));
+    }
+
+    @Test
+    void shouldThrowExceptionWhenOperatorAlreadyHasActiveMission() {
+        RescueOperator operator = new RescueOperator("OP1", "NAME");
+        Drone drone1 = new Drone("DR001", "Model1", 100);
+        Drone drone2 = new Drone("DR002", "Model2", 100);
+
+        rescueCenter.addOperator(operator);
+        rescueCenter.addDrone(drone1);
+        rescueCenter.addDrone(drone2);
+        // Asignación m1
+        rescueCenter.assignMission("OP1", "DR001", "LOCATION 1", 10);
+        // Intento asignar m2
+        assertThrows(IllegalStateException.class, () -> rescueCenter.assignMission("OP1", "DR002", "LOCATION 2", 20));
+    }
+
     // PRUEBAS PARA completeMission
     @Test
     void shouldCloseAActiveMission() {
@@ -118,5 +150,25 @@ public class RescueCenterTest {
         rescueCenter.completeMission(mission.getId());
         assertThrows(IllegalStateException.class, () -> rescueCenter.completeMission(mission.getId()));
     }
+
+    @Test
+void shouldNotModifyOtherActiveMissionWhenOneIsCompleted() {
+    RescueOperator op1 = new RescueOperator("OP1", "Operador 1");
+    RescueOperator op2 = new RescueOperator("OP2", "Operador 2");
+    Drone drone1 = new Drone("DR001", "Model1", 100);
+    Drone drone2 = new Drone("DR002", "Model2", 100);
+    rescueCenter.addOperator(op1);
+    rescueCenter.addOperator(op2);
+    rescueCenter.addDrone(drone1);
+    rescueCenter.addDrone(drone2);
+    Mission mission1 = rescueCenter.assignMission("OP1", "DR001", "Zona 1", 10);
+    Mission mission2 = rescueCenter.assignMission("OP2", "DR002", "Zona 2", 20);
+    // Completar m1
+    rescueCenter.completeMission(mission1.getId());
+    // Verificar que m2 y el dron no cambien
+    assertEquals(MissionStatus.ACTIVE, mission2.getStatus());
+    assertNull(mission2.getEndDate());
+    assertFalse(drone2.isAvailable(), "El dron de la otra misión debe seguir estando ocupado");
+}
 
 }
