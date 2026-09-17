@@ -64,7 +64,8 @@ public class RescueCenterTest {
         assertEquals(operator, mission.getOperator());
         assertEquals(drone, mission.getDrone());
         assertEquals(10, mission.getDistanceKm());
-        assertEquals(LocalDateTime.now(), mission.getStartDate());
+        assertNotNull(mission.getStartDate());
+        assertFalse(mission.getStartDate().isAfter(LocalDateTime.now()));
         assertEquals(MissionStatus.ACTIVE, mission.getStatus());
 
     }
