@@ -142,8 +142,28 @@ public class RescueCenter {
      * @return completed mission.
      */
     public Mission completeMission(String missionId) {
-        // TODO Implement using TDD.
-        return null;
+       if (missionId == null || missionId.trim().isEmpty()) {
+            throw new IllegalArgumentException("Mission ID cannot be null or empty.");
+        }
+
+        Mission mission = missions.stream()
+                .filter(m -> missionId.equals(m.getId()))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("Mission not found: " + missionId));
+
+        if (mission.getStatus() == MissionStatus.COMPLETED) {
+            throw new IllegalStateException("Mission is already completed.");
+        }
+
+        mission.setStatus(MissionStatus.COMPLETED);
+        mission.setEndDate(LocalDateTime.now());
+        Drone drone = mission.getDrone();
+        
+        if (drone != null) {
+            drone.setAvailable(true);
+        }
+
+        return mission;
     }
 
     public boolean addOperator(RescueOperator operator) {
