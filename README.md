@@ -86,3 +86,8 @@ metodo completeMission_()
 - PR SonarQube: [Google](https://github.com/pedroay/DOSW_LAB5_AYALA_ARGALLE_CAICEDO/pull/7)
 
 ## Reflexion tecnica
+
+¿Qué error o comportamiento inesperado fue detectado primero gracias a una prueba?
+¿Qué parte del código cambió durante REFACTOR sin modificar el comportamiento?
+¿Qué casos adicionales aparecieron al revisar la cobertura?
+¿Qué hallazgo de SonarQube produjo un cambio real en el código?
