@@ -74,6 +74,14 @@ metodo completeMission_()
 
 ## SonarQube
 
+analisis terminado
+![analisis terminado y cobertuiir](/docs/evidence/analisis.png)
+
+issues encontrados
+
+![issues encontrados](/docs/evidence/issues.png)
+
+
 
 ## Pull Requests
 
@@ -91,3 +99,8 @@ metodo completeMission_()
 ¿Qué parte del código cambió durante REFACTOR sin modificar el comportamiento?
 ¿Qué casos adicionales aparecieron al revisar la cobertura?
 ¿Qué hallazgo de SonarQube produjo un cambio real en el código?
+
+- permitiamos la creacion de drones duplicados, problema que fue resuelto a tiempo con los test, 
+- más que nada los if, los cuales se separaron de acuerdo a los distintos comportamientos
+- más que un caso adicional fue la adición de los test de drone, para corroborar su funcionamiento basico
+- nos marcó una serie de errores en la fiabilidad al hablar con extraños en una parte que se resolvió gracias a la indicacion de el Sonar
