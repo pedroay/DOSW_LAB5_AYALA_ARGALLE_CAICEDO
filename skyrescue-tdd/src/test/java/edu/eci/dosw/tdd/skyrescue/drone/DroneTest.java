@@ -15,7 +15,7 @@ public class DroneTest {
         assertEquals(50, drone.getMaxRangeKm());
         assertTrue(drone.isAvailable());
     }
-
+    //test about the availability status of the drone, it should be available by default, and we should be able to modify it using the setAvailable method
     @Test
     void shouldModifyAvailabilityStatus() {
         Drone drone = new Drone("DR001", "DJI Matrice", 50);
@@ -26,12 +26,11 @@ public class DroneTest {
         drone.setAvailable(true);
         assertTrue(drone.isAvailable());
     }
-
+    //Test that two drones with the same id are equal and have the same hash code, and that a drone is equal to itself
     @Test
     void shouldBeEqualAndHaveSameHashCodeWhenSameId() {
         Drone drone1 = new Drone("DR001", "DJI Matrice", 50);
         Drone drone2 = new Drone("DR001", "DJI Phantom", 80);
-
         assertEquals(drone1, drone2);
         assertEquals(drone1.hashCode(), drone2.hashCode());
         assertEquals(drone1, drone1);
